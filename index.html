@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khaled Essam</title>
+  <style>
+    :root {
+      --bg: #08111f;
+      --bg-soft: #0d1a2d;
+      --card: rgba(255,255,255,0.05);
+      --line: rgba(255,255,255,0.1);
+      --text: #e8edf5;
+      --muted: #a6b1c2;
+      --accent: #58b7ff;
+      --accent-2: #8c7dff;
+      --shadow: 0 18px 50px rgba(0,0,0,0.28);
+      --radius: 22px;
+      --max: 1150px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(88,183,255,0.16), transparent 30%),
+        radial-gradient(circle at 20% 20%, rgba(140,125,255,0.12), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(8,17,31,0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 92px;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: 1.2px;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover,
+    .project-link:hover,
+    .socials a:hover { color: var(--accent); }
+
+    .hero {
+      padding: 88px 0 54px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.95fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent);
+      background: rgba(255,255,255,0.03);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.02;
+      margin: 0 0 14px;
+      letter-spacing: -1.5px;
+    }
+
+    .hero-title-accent {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      display: inline-block;
+      font-size: clamp(1.35rem, 2.6vw, 2.15rem);
+      line-height: 1.25;
+      font-weight: 800;
+      margin: 0 0 22px;
+      color: var(--text);
+    }
+
+    .hero-subtitle span {
+      color: var(--accent);
+    }
+
+    .lead {
+      font-size: 1.06rem;
+      color: var(--muted);
+      max-width: 680px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 20px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), #78d3ff);
+      color: #07111f;
+      box-shadow: var(--shadow);
+    }
+
+    .btn.secondary {
+      border-color: var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .socials {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h3 {
+      margin-top: 0;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 16px;
+      border-radius: 18px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.45rem;
+      margin-bottom: 5px;
+    }
+
+    section {
+      padding: 34px 0 28px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin: 0 0 10px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      margin: 0 0 24px;
+      max-width: 760px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.18rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: #d6e0ee;
+    }
+
+    .project-link {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill {
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      color: #dce7f6;
+      font-weight: 600;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+    }
+
+    .footer {
+      padding: 34px 0 52px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .about,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-inner {
+        padding: 12px 0;
+        align-items: center;
+        flex-direction: row;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">KHALED ESSAM</div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-subtitle">Data Analyst | <span>SQL Server</span> & <span>Data Warehousing Specialist</span> | Transforming Data into Actionable Business Insights</div>
+        <p class="lead">
+          Data Analyst with hands-on experience building end-to-end data warehouse projects using Medallion Architecture (Bronze, Silver, Gold). Skilled in SQL Server, data modeling, ETL development, Power BI data visualization, and Python libraries for data cleaning, analysis, and insight generation.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#projects">View My Projects</a>
+          <a class="btn secondary" target="_blank" href="https://github.com/khaliedessam">GitHub Profile</a>
+        </div>
+        <div class="socials">
+          <a target="_blank" href="https://github.com/khaliedessam">GitHub</a>
+          <a href="mailto:khaliedessam96@gmail.com">Email</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>What I focus on</h3>
+        <p class="lead" style="margin:0; font-size:0.98rem; max-width:none;">
+          End-to-end SQL Server data projects, Medallion Architecture, dimensional modeling, ETL development, Power BI dashboards, Python data analysis, and portfolio work tailored for Data Analyst roles.
+        </p>
+        <div class="stats">
+          <div class="stat">
+            <strong>3-layer</strong>
+            <span>warehouse architecture</span>
+          </div>
+          <div class="stat">
+            <strong>SQL Server</strong>
+            <span>analysis and ETL flow</span>
+          </div>
+          <div class="stat">
+            <strong>Star schema</strong>
+            <span>fact and dimension modeling</span>
+          </div>
+          <div class="stat">
+            <strong>Power BI</strong>
+            <span>data visualization</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-desc">
+          A selection of my data warehouse and analytics repositories focused on SQL Server, ETL development, dimensional modeling, and business insights.
+        </p>
+
+        <div class="grid">
+          <article class="card">
+            <h3>SQL Data Warehouse Project</h3>
+            <div class="meta">
+              <span class="tag">SQL Server</span>
+              <span class="tag">ETL</span>
+              <span class="tag">Star Schema</span>
+            </div>
+            <p>
+              Built a full warehouse pipeline from raw CSV files into bronze, silver, and gold layers, then created analytics-ready models and reporting outputs.
+            </p>
+            <a class="project-link" target="_blank" href="https://github.com/khaliedessam/sql-data-warehouse-project">Open Repository →</a>
+          </article>
+
+          <article class="card">
+            <h3>Banking Data Warehouse</h3>
+            <div class="meta">
+              <span class="tag">Banking Domain</span>
+              <span class="tag">Dimensional Modeling</span>
+              <span class="tag">Analytics</span>
+            </div>
+            <p>
+              Designed a banking-focused dimensional model around transactions, customers, accounts, merchants, and dates to support reporting and business analysis.
+            </p>
+            <a class="project-link" target="_blank" href="https://github.com/khaliedessam/banking-data-warehouse-project">Open Repository →</a>
+          </article>
+
+          <article class="card">
+            <h3>GitHub Portfolio</h3>
+            <div class="meta">
+              <span class="tag">GitHub</span>
+              <span class="tag">SQL Projects</span>
+              <span class="tag">Portfolio</span>
+            </div>
+            <p>
+              Explore my GitHub profile for SQL Server, data warehousing, analytics, and portfolio projects built to demonstrate practical data analysis skills.
+            </p>
+            <a class="project-link" target="_blank" href="https://github.com/khaliedessam">Open GitHub Profile →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <p class="section-desc">
+          Core tools, technologies, and concepts I use to clean, model, analyze, and visualize data.
+        </p>
+        <div class="skills">
+          <span class="skill">SQL Server</span>
+          <span class="skill">SSMS</span>
+          <span class="skill">Data Warehousing</span>
+          <span class="skill">ETL / ELT</span>
+          <span class="skill">Dimensional Modeling</span>
+          <span class="skill">Star Schema</span>
+          <span class="skill">Medallion Architecture</span>
+          <span class="skill">CTEs</span>
+          <span class="skill">Window Functions</span>
+          <span class="skill">Power BI</span>
+          <span class="skill">Data Visualization</span>
+          <span class="skill">Python</span>
+          <span class="skill">Pandas</span>
+          <span class="skill">NumPy</span>
+          <span class="skill">Matplotlib</span>
+          <span class="skill">Seaborn</span>
+          <span class="skill">Data Cleaning</span>
+          <span class="skill">Git & GitHub</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about">
+        <div class="card">
+          <h2 class="section-title" style="font-size:1.7rem; margin-top:0;">About Me</h2>
+          <p>
+            My name is <strong>Khaled Essam</strong>. I am a Data Analyst focused on SQL Server, Data Warehousing, ETL development, data modeling, and business intelligence reporting. I build end-to-end data projects using Medallion Architecture, starting from raw source data and ending with clean, analytics-ready models.
+          </p>
+          <p>
+            I use advanced SQL techniques such as CTEs, Window Functions, aggregations, and dimensional modeling, along with Power BI for data visualization and Python libraries such as Pandas, NumPy, Matplotlib, and Seaborn for data analysis. My goal is to create clear insights that help stakeholders understand performance, trends, customers, accounts, merchants, and business activity.
+          </p>
+        </div>
+        <div class="card" id="contact">
+          <h2 class="section-title" style="font-size:1.7rem; margin-top:0;">Contact</h2>
+          <p><strong>Name:</strong> Khaled Essam</p>
+          <p><strong>Email:</strong> khaliedessam96@gmail.com</p>
+          <p><strong>GitHub:</strong> <a class="project-link" target="_blank" href="https://github.com/khaliedessam">github.com/khaliedessam</a></p>
+          <p><strong>LinkedIn:</strong> <a class="project-link" target="_blank" href="https://www.linkedin.com/in/khaled-essam-36b452246/">linkedin.com/in/khaled-essam-36b452246</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Khaled Essam. Built for GitHub Pages.</div>
+  </footer>
+</body>
+</html>
